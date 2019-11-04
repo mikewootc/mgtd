@@ -23,22 +23,18 @@ describe('MochaUser', function() {
             try {
                 // 首先确保删除用户(如果存在)
                 const resGetToken = await axios.post('http://localhost:7001/user/getToken', {
-                    data: {
-                        username: USERNAME,
-                        password: PASSWORD,
-                    }
+                    username: USERNAME,
+                    password: PASSWORD,
                 });
+                //console.log('resGetToken.data:', resGetToken.data);
                 if (resGetToken.data._id) {
                     const resDel = await axios.delete(`http://localhost:7001/user/${resGetToken.data._id}`, { });
                 }
 
                 const res = await axios.post('http://localhost:7001/user', {
-                    params: {
-                    },
-                    data: {
                         username: USERNAME,
                         password: PASSWORD,
-                    },
+                }, {
                     timeout: 5000, // ms
                     responseType: 'json', //  'text', 'arraybuffer', 'blob', 'document', 'json'(默认), 'stream'
                 });
@@ -56,10 +52,8 @@ describe('MochaUser', function() {
         (async () => {
             try {
                 const res = await axios.post('http://localhost:7001/user/getToken', {
-                    data: {
-                        username: USERNAME,
-                        password: PASSWORD,
-                    }
+                    username: USERNAME,
+                    password: PASSWORD,
                 });
                 assert.equal(res.status, 200);
                 const res2 = await axios.get('http://localhost:7001/user/testToken', {

@@ -1,13 +1,13 @@
 const Controller = require('egg').Controller;
 const fs = require('fs');
 
-class UserController extends Controller {
+class TodoController extends Controller {
     async create() {
         try {
             let request = this.ctx.request;
-            this.ctx.logger.info('user create:', request.body);
-            const username = request.body.username;
-            const password = request.body.password;
+            this.ctx.logger.info('todo create:', this.ctx.request.body.data);
+            const username = request.body.data.username;
+            const password = request.body.data.password;
             let user = await this.ctx.model.User.find({username});
             if (user.length > 0) {
                 this.ctx.logger.error('Already existed user:', username);
@@ -41,46 +41,37 @@ class UserController extends Controller {
     }
 
     async getToken() {
-        let user;
         try {
             this.ctx.logger.debug('getToken');
             let request = this.ctx.request;
-            this.ctx.logger.info('user getToken:', request.body);
-            user = await this._checkPassword();
-        } catch(err) {
-            this.ctx.response.body = {result: 'fail', reason: 'NoSuchUser'};
-            return;
-            //throw err;
-        }
-
-        try {
+            let token;
+            const user = await this._checkPassword();
             const jwt = this.ctx.app.jwt;
 
             if (jwt) {
                 this.ctx.logger.debug('get jwt');
-                let token = jwt.sign({...user}, this.ctx.app.config.jwt.secret, { expiresIn: '2h' });
+                token = jwt.sign({...user}, this.ctx.app.config.jwt.secret, { expiresIn: '2h' });
                 this.ctx.body = {result: 'ok', username: user.username, _id: user._id, token};
             }
         } catch(err) {
             throw err;
         }
-
     }
 
     async _checkPassword() {
         try {
             this.ctx.logger.debug('checkPassword');
             let request = this.ctx.request;
-            const username = request.body.username;
-            const password = request.body.password;
+            const username = request.body.data.username;
+            const password = request.body.data.password;
 
             let user = await this.ctx.model.User.findOne({username, password});
-            this.ctx.logger.debug('user:', user);
+            this.ctx.logger.debug('user:', user.username, user._id);
             if (user) {
                 return user;
             } else {
                 this.ctx.body = {result: 'fail', reason: 'UsernameOrPasswordError'};
-                throw new Error('UsernameOrPasswordError');
+                throw new Error('  UsernameOrPasswordError');
             }
         } catch(err) {
             throw err;
@@ -88,4 +79,4 @@ class UserController extends Controller {
     }
 }
 
-module.exports = UserController;
+module.exports = TodoController;
