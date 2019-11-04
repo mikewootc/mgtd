@@ -6,21 +6,13 @@
   "scripts": {
     "________client_stuff": "",
     "devc": "webpack --watch --dev",
-    "build": "webpack",
-    "________egg_stuff": "",
-    "dev": "egg-bin dev --sticky",
-    "start": "egg-scripts start --sticky",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cpclog": "^1.0.13",
-    "egg": "^2.14.2",
-    "egg-bin": "^4.9.0",
-    "egg-jwt": "^3.1.4",
-    "egg-mongoose": "^3.1.1"
+    "cpclog": "^1.0.13"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
