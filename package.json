@@ -1,0 +1,48 @@
+{
+  "name": "mgtd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "________client_stuff": "",
+    "devc": "webpack --watch --dev",
+    "build": "webpack",
+    "________egg_stuff": "",
+    "dev": "egg-bin dev --sticky",
+    "start": "egg-scripts start --sticky",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cpclog": "^1.0.13",
+    "egg": "^2.14.2",
+    "egg-bin": "^4.9.0",
+    "egg-jwt": "^3.1.4",
+    "egg-mongoose": "^3.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "compression": "^1.7.3",
+    "css-loader": "^2.0.1",
+    "deep-freeze": "^0.0.1",
+    "dot-prop-immutable": "^1.4.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.2.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.1"
+  }
+}
