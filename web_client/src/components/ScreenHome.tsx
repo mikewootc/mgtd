@@ -1,12 +1,17 @@
 'use strict'
 
-import React                            from 'react';
-import { inject, observer }             from "mobx-react"
+import * as React                       from 'react';
+import { inject, observer }             from 'mobx-react';
+import TodoStore                        from '../models/TodoStore';
+
+interface Props {
+    todo: TodoStore,
+}
 
 @inject('todo')
 @observer
-class ScreenHome extends React.Component {
-    constructor(props) {
+class ScreenHome extends React.Component<Props> {
+    constructor(props: Props) {
         super(props);
     }
 
@@ -25,7 +30,7 @@ class ScreenHome extends React.Component {
     }
 }
 
-const ss = {
+const ss:{[key: string]: Object} = {
     box: {
         display             : 'flex',
         flexDirection       : 'column',

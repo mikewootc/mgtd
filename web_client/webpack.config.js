@@ -4,7 +4,7 @@ let webpack = require('webpack')
 let config = {
     //mode: 'development',
     entry: {
-        'client': __dirname + "/src/main.js",
+        'client': __dirname + "/src/main.tsx",
     },
     output: {                               // 输出
         path: __dirname,                    // 打包后的js文件存放的地方
@@ -14,7 +14,7 @@ let config = {
     module: {
         rules: [ //loaders加载器
             {
-                test: /\.(js|jsx)$/,    // 一个匹配loaders所处理的文件的拓展名的正则表达式, 这里用来匹配js和jsx文件(必须)
+                test: /\.(js|jsx|ts|tsx)$/,    // 一个匹配loaders所处理的文件的拓展名的正则表达式, 这里用来匹配js和jsx文件(必须)
                 exclude: /node_modules/,// 屏蔽不需要处理的文件(文件夹)(可选)
                 loader: 'babel-loader',        // loader的名称(必须)
                 query: {
@@ -55,7 +55,7 @@ let config = {
     },
 
     resolve: {
-        extensions: ['.js', '.jsx', '.json']
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
     }
 };
 

@@ -1,12 +1,14 @@
 //import UserStore        from './UserStore.js';
-import TodoStore        from './TodoStore.js';
+import TodoStore        from './TodoStore';
 
 class RootStore {
+    todo: TodoStore;
+
     constructor() {
         //this.userStore = new UserStore(this);
-        this.todo = new TodoStore(this);
+        this.todo = new TodoStore();
     }
 }
 
-const store = window.store = new RootStore();
+const store = globalThis.store = new RootStore();
 export default store;
