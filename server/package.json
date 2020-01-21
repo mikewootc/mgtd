@@ -4,12 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "________client_stuff": "",
-    "devc": "webpack --watch --dev",
-    "build": "webpack",
     "________egg_stuff": "",
     "dev": "egg-bin dev --sticky",
     "start": "egg-scripts start --sticky",
+    "starts": "egg-scripts start --sticky --https.key=ssl/privatekey.pem  --https.cert=ssl/certificate.pem",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = (appInfo) => ({
     static: {
-        dir: path.join(appInfo.baseDir, 'client/public'),
+        dir: path.join(appInfo.baseDir, 'client/public/'),
     },
 
     security: {

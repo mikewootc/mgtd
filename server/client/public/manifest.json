@@ -1,0 +1,10 @@
+{
+    "name": "mgtd",
+    "icons": [
+        {
+            "src": "/public/assets/images/logo/32.jpg",
+            "sizes": "32x32",
+            "type": "image/jpg"
+        }
+    ]
+}

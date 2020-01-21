@@ -21,4 +21,3 @@ render(
     , document.getElementById('content')
 );
 
-
