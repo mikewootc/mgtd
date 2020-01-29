@@ -13,12 +13,14 @@ const logger = Logger.createWrapper('main', Logger.LEVEL_DEBUG);
 import store                            from './models/RootStore';
 import ScreenHome                       from './components/ScreenHome';
 
+import 'antd/dist/antd.css';
+
 //console.log('store:', store);
 
 render(
     <Provider {...store}>
         <HashRouter>
-            <div style={{width: '100%', height: '100%', backgroundColor: '#bbb'}} >
+            <div style={ {width: '100%', height: '100%', overflow: 'hidden'} } >
                 <Route exact path="/" component={ ScreenHome }/>
                 {/* <Route path="/home" component={ ScreenHomeCtn }/> */}
             </div>
