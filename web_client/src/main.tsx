@@ -17,6 +17,14 @@ import 'antd/dist/antd.css';
 
 //console.log('store:', store);
 
+(async () => {
+    try {
+        let ret = await store.init();
+    } catch(err) {
+        console.log(err);
+    }
+})();
+
 render(
     <Provider {...store}>
         <HashRouter>

@@ -10,6 +10,11 @@ class RootStore {
         //this.userStore = new UserStore(this);
         this.todo           = new TodoStore();
         this.ui             = new UiStore();
+
+    }
+
+    init() {
+        this.todo.init();
     }
 }
 

@@ -32,10 +32,10 @@ class ScreenHome extends React.Component<Props> {
      * Submit addNewTodo
      * @memberof ScreenHome
      */
-    onNewTodoSubmit = (e:any) => {
+    onNewTodoSubmit = async (e:any) => {
         console.log('onNewTodoSubmit:', this.props.ui.data.screenHome.addTodoInputText);
         //this.props.ui.data.screenHome.addTodoInputText = e.target.value;
-        this.props.todo.addTodo(this.props.ui.data.screenHome.addTodoInputText);
+        await this.props.todo.addTodo(this.props.ui.data.screenHome.addTodoInputText);
     }
 
     /**
@@ -43,12 +43,14 @@ class ScreenHome extends React.Component<Props> {
      * @memberof ScreenHome
      */
     onCheckTodoItem = (todoId:string) => {
-        let todo = this.props.todo.dicTodos[todoId];
-        todo.toggleComplete();
+        let todoStore = this.props.todo;
+        todoStore.toggleComplete(todoId);
+        //let todo = this.props.todo.dicTodos[todoId];
+        //todo.toggleComplete();
     }
 
-    removeTodo = (todoId:string) => {
-        this.props.todo.removeTodo(todoId);
+    onPressRemoveTodo = async (todoId:string) => {
+        await this.props.todo.trashTodo(todoId);
     }
 
     renderTodoList() {
@@ -90,6 +92,9 @@ class ScreenHome extends React.Component<Props> {
             todoItemTitleCompleted: {
                 color                   : 'green',
             },
+            todoItemTitleTrashed: {
+                color                   : 'gray',
+            },
 
             todoItemDelete: {
                 borderColor             : 'gray',
@@ -112,13 +117,16 @@ class ScreenHome extends React.Component<Props> {
                 <ul style={ ss.todoItemUl }>
                     { Object.keys(dicTodos).map((id) => {
                         let todo = dicTodos[id];
-                        let titleStyle:{[key: string]: Object} = todo.completed ? {...ss.todoItemTitle, ...ss.todoItemTitleCompleted} : ss.todoItemTitle;
+                        let titleStyle:{[key: string]: Object} = todo.trashed ?
+                            { ...ss.todoItemTitle, ...ss.todoItemTitleTrashed } :
+                            todo.completed ? { ...ss.todoItemTitle, ...ss.todoItemTitleCompleted } : ss.todoItemTitle;
+
                         return (
                             <li style={ ss.todoItemLi } key={ id }>
                                 {/* <Checkbox onChange={ () => {this.onCheckTodoItem(id)} }></Checkbox> */}
                                 <input style={ ss.todoItemCheckbox } type='checkbox' onChange={ () => {this.onCheckTodoItem(id)} } />
                                 <span style={ titleStyle }> { todo.title } </span>
-                                <span style={ ss.todoItemDelete } onClick={ () => {this.removeTodo(id)} }> X </span>
+                                <span style={ ss.todoItemDelete } onClick={ () => {this.onPressRemoveTodo(id)} }> X </span>
                             </li>
                         );
                     }) }

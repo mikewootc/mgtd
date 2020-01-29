@@ -1,5 +1,6 @@
 {
-    "name": "mgtd",
+    "name": "mgtd app",
+    "display": "standalone",
     "icons": [
         {
             "src": "/public/assets/images/logo/32.jpg",
