@@ -50,7 +50,14 @@ class ScreenHome extends React.Component<Props> {
     }
 
     onPressRemoveTodo = async (todoId:string) => {
-        await this.props.todo.trashTodo(todoId);
+        let todo = this.props.todo.dicTodos[todoId];
+        if (todo) {
+            if (todo.trashed) {
+                await this.props.todo.removeTodo(todoId);
+            } else {
+                await this.props.todo.trashTodo(todoId);
+            }
+        }
     }
 
     renderTodoList() {
