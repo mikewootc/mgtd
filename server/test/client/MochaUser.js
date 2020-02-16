@@ -2,7 +2,7 @@ const mocha = require('mocha');
 const assert = require('assert');
 const axios = require('axios');
 
-const USERNAME = 'mike';
+const USERNAME = 'test';
 const PASSWORD = '1234';
 
 describe('MochaUser', function() {
@@ -26,8 +26,9 @@ describe('MochaUser', function() {
                     username: USERNAME,
                     password: PASSWORD,
                 });
-                //console.log('resGetToken.data:', resGetToken.data);
+                console.log('resGetToken.data:', resGetToken.data);
                 if (resGetToken.data._id) {
+                    console.log('Try to remove user.');
                     const resDel = await axios.delete(`http://localhost:7001/user/${resGetToken.data._id}`, { });
                 }
 
@@ -48,27 +49,27 @@ describe('MochaUser', function() {
         })();
     });
 
-    it('Token', function(done) {
-        (async () => {
-            try {
-                const res = await axios.post('http://localhost:7001/user/getToken', {
-                    username: USERNAME,
-                    password: PASSWORD,
-                });
-                assert.equal(res.status, 200);
-                const res2 = await axios.get('http://localhost:7001/user/testToken', {
-                    headers: {
-                        Authorization: `Bearer ${res.data.token}`,
-                    },
-                });
-                console.log('res2:', res2.data);
-                assert.equal(res2.status, 200);
-                assert.equal(res2.data.result, 'ok');
-                assert.equal(res2.data.username, USERNAME);
-                done();
-            } catch(err) {
-                done(err);
-            }
-        })();
-    });
+//    it('Token', function(done) {
+//        (async () => {
+//            try {
+//                const res = await axios.post('http://localhost:7001/user/getToken', {
+//                    username: USERNAME,
+//                    password: PASSWORD,
+//                });
+//                assert.equal(res.status, 200);
+//                const res2 = await axios.get('http://localhost:7001/user/testToken', {
+//                    headers: {
+//                        Authorization: `Bearer ${res.data.token}`,
+//                    },
+//                });
+//                console.log('res2:', res2.data);
+//                assert.equal(res2.status, 200);
+//                assert.equal(res2.data.result, 'ok');
+//                assert.equal(res2.data.username, USERNAME);
+//                done();
+//            } catch(err) {
+//                done(err);
+//            }
+//        })();
+//    });
 });

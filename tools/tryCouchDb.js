@@ -12,11 +12,12 @@ const Nano = require('nano');
 const config = require('./mikelocal_config.js');
 console.log('config:', config);
 const nanoAdmin = Nano(`http://${config.couchDbAdmin}:${config.couchDbPass}@localhost:5984`);
+const nanoJane  = Nano(`http://jane:apple@localhost:5984`);
+const nanoZod   = Nano(`http://zod:apple@localhost:5984`);
 
 let username = 'jane';
 const todoDbName = `todos_${username}`;
-let dbTodosCarl;
-let nanoCarl;
+let dbTodosZod;
 (async () => {
     try {
         // create user jane
@@ -34,15 +35,15 @@ let nanoCarl;
     }
 
     try {
-        // create user carl
-        console.log('Create user carl');
+        // create user zod
+        console.log('Create user zod');
         const _users = nanoAdmin.use('_users');
         await _users.insert({
-            name    : 'carl',
+            name    : 'zod',
             password: 'apple',
             roles   : [],
             type    : 'user'
-        }, `org.couchdb.user:carl`);
+        }, `org.couchdb.user:zod`);
         console.log('Create user, finished');
     } catch(err) {
         console.log(err.message);
@@ -67,10 +68,9 @@ let nanoCarl;
     }
 
     try {
-        console.log('carl set todo_1');
-        nanoCarl = Nano(`http://carl:apple@localhost:5984`);
-        dbTodosCarl = nanoCarl.use(todoDbName);
-        await dbTodosCarl.insert({
+        console.log('zod set todo_1');
+        dbTodosZod = nanoZod.use(todoDbName);
+        await dbTodosZod.insert({
             title: 'this is todo_1',
         }, 'todo_1'); 
         console.log('set todo_1 finished');
@@ -84,12 +84,16 @@ let nanoCarl;
         await dbTodosAdmin.insert({
             admins: {
                 names: [username],
-                roles: ['admin']
-            },
-            readers: {
-                names: [],
                 roles: []
-            }
+            },
+            members: {
+                names: [username],
+                roles: []
+            },
+            //readers: {
+            //    names: ['zod'],
+            //    roles: ['reader']
+            //}
         }, '_security'); 
         console.log('set security finished');
     } catch(err) {
@@ -97,11 +101,11 @@ let nanoCarl;
     }
 
     try {
-        console.log('carl set todo_2');
-        await dbTodosCarl.insert({
+        console.log('zod set todo_2');
+        await dbTodosZod.insert({
             title: 'this is todo_2',
         }, 'todo_2'); 
-        console.log('set todo_2 finished');
+        console.log('[01;31mset todo_2 finished[0m');
     } catch(err) {
         console.log(err.message);
     }

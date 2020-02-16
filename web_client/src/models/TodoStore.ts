@@ -85,7 +85,7 @@ export default class TodoStore {
 
     setCouchDbSyncInfo(url:string, username:string, password:string) {
         // this.couchDbUrl = 'http://user:pass@1.2.3.4:5984/todos';
-        this.couchDbUrl = 'http://mike:abcd@192.168.1.109:5984/todos';
+        this.couchDbUrl = 'https://mike:abcd@192.168.1.202:6984/todos';
         //this.couchDbUrl = url;
         this.couchDbUsername = username;
         this.couchDbPassword = password;

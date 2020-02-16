@@ -16,9 +16,11 @@
   "dependencies": {
     "cpclog": "^1.0.13",
     "egg": "^2.14.2",
-    "egg-bin": "^4.9.0",
+    "egg-bin": "^4.14.1",
     "egg-jwt": "^3.1.4",
-    "egg-mongoose": "^3.1.1"
+    "egg-mongoose": "^3.1.1",
+    "egg-scripts": "^2.12.0",
+    "nano": "^8.1.0"
   },
   "devDependencies": {
     "axios": "^0.19.0",
